@@ -12,11 +12,11 @@ class ListUser extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("https://jsonplaceholder.typicode.com/posts")
       .then(res => {
+        const selectUser = res.data.slice(0,10);
         this.setState({
-          users: res.data
+          users: selectUser
         });
       })
       .catch(error => {
@@ -80,9 +80,10 @@ class ListUser extends Component {
                   <td>{user.id}</td>
                   <td>{user.title}</td>
                   <td>{user.body}</td>
-                  <td> <a href={`/detail/${user.id}`} target='_blank'> Detail </a> </td>
+                  <td> <a href={`/detail/${user.id}`} target="_blank"> Detail </a> </td>
                   <td> <a href={`/update/${user.id}`} target='_blank'> Update </a> </td>
                   <td> <Button onClick= {() => this.deleteDataHandler(user)} > Delete </Button> </td>
+                  
                   {/* <td> {user.userId} </td>
                   <td>{user.employee_name}</td>
                   <td>{user.employee_salary}</td>

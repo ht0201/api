@@ -13,7 +13,7 @@ class withRouterDetailUser extends Component {
 
     componentDidMount() {
         var idUser = this.props.match.params.id;	
-        
+        debugger;
         axios.get(`https://jsonplaceholder.typicode.com/posts/${idUser}`)
             .then(res => {
                 console.log(res);

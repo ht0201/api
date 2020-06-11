@@ -22,7 +22,7 @@ function App() {
           <Route path="/new">
              <CreateUser />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
            <a href='/new' > Create new user</a>
             <ListUser />
           </Route>

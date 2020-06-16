@@ -2,28 +2,26 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class CreateUser extends Component {
+class  CreatePost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: {
+            posts: {
                 userId: '',
                 title: '',
                 body: ''
             }
         }  
-        
-    
     }
 
     postDataHandler= () => {
-        const {users} = this.state;
-        console.log(users);
+        const {posts} = this.state;
+        console.log(posts);
       
         var data = {
-            userId: users.userId,
-            title: users.title,
-            body: users.body
+            userId: posts.userId,
+            title: posts.title,
+            body: posts.body
         };
         axios.post('https://jsonplaceholder.typicode.com/posts', data)
             .then(res => {
@@ -32,9 +30,9 @@ class CreateUser extends Component {
             .catch(error => {
                 console.log(error);
             });
-        if (window.confirm(`Your user ${users.userId} is created. Do you want to go list user page ?`))
+        if (window.confirm(`Your new post is created. Do you want to go list post page ?`))
             {
-                return window.location.href='/';
+                 this.props.history.goBack();
             }
         else{
             return; 
@@ -48,9 +46,9 @@ class CreateUser extends Component {
         
         
         this.setState (prevState => {
-            prevState.users[name] = value;
+            prevState.posts[name] = value;
             return {
-                users: prevState.users    
+                posts: prevState.posts    
             };
             
         })
@@ -60,11 +58,11 @@ class CreateUser extends Component {
         
         return(
             <div className='NewPost'>
-                <h3> Create new user </h3>
+                <h3> Create new post </h3>
                 <Form>
                     <FormGroup>
                         <Label for="userId">UserId</Label>
-                        <Input type="text" name="userId" value={this.state.users.userId} 
+                        <Input type="text" name="userId" value={this.state.posts.userId} 
                         placeholder="input number UserId"
                         onChange={this.inputChangeHandler}
                         
@@ -72,14 +70,14 @@ class CreateUser extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="title">Title</Label>
-                        <Input type="text" name="title" value={this.state.users.title} 
+                        <Input type="text" name="title" value={this.state.posts.title} 
                         placeholder="input text Title"
                         onChange={this.inputChangeHandler}
                          />
                     </FormGroup>
                     <FormGroup>
                         <Label for="Body">Body</Label>
-                        <Input type="text" name="body" value={this.state.users.body} 
+                        <Input type="text" name="body" value={this.state.posts.body} 
                         placeholder="input text Body" 
                         onChange={this.inputChangeHandler}
                         />
@@ -91,4 +89,4 @@ class CreateUser extends Component {
     }
 }
 
-export default CreateUser;
+export default CreatePost;

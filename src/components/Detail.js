@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
-import { withRouter}  from "react-router";
 import { Container, Table} from 'reactstrap';
 import axios from 'axios';
-import { Link } from "react-router-dom";
 
-class withRouterDetailUser extends Component {
+class Detail extends Component {
     constructor(props){
         super(props);
         this.state ={
-            user:[]
+            posts:[]
         }
     }
 
     componentDidMount() {
-        var idUser = this.props.match.params.id;	
-        
-        axios.get(`https://jsonplaceholder.typicode.com/posts/${idUser}`)
+        var idPost = this.props.match.params.id;	
+
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${idPost}`)
             .then(res => {
-                console.log(res);
                  this.setState ({
-                     user: res.data
+                     posts: res.data
                  });          
             }).catch(error => {
                 console.log('error', error)
@@ -27,11 +24,11 @@ class withRouterDetailUser extends Component {
     }
 
     render(){
-        const {user} = this.state;
+        const {posts} = this.state;
         
         return (
                 <Container>
-                <h2> User Detail </h2>
+                <h2> Post Detail </h2>
                 <Table>
                     <thead>
                         <tr>
@@ -43,10 +40,10 @@ class withRouterDetailUser extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td> {user.userId} </td>
-                            <td>{user.id}</td>
-                            <td>{user.title}</td>
-                            <td>{user.body}</td>
+                            <td> {posts.userId} </td>
+                            <td> {posts.id} </td>
+                            <td> {posts.title} </td>
+                            <td> {posts.body} </td>
                         </tr>
                     </tbody>
                 </Table>
@@ -55,4 +52,4 @@ class withRouterDetailUser extends Component {
     }
 }
 
-export default withRouter(withRouterDetailUser);
+export default Detail;

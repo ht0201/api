@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
-import { withRouter } from "react-router";
 
-class withRouterUpdateUser extends Component {
+
+class UpdatePost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            posts: []
         }  
         
     }
 
     componentDidMount() {
-        var idUser = this.props.match.params.id;	
+        var idPost = this.props.match.params.id;	
         
-        axios.get(`https://jsonplaceholder.typicode.com/posts/${idUser}`)
-            .then(res => {
-                 this.setState ({
-                     users: res.data
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${idPost}`)
+                .then(res => {
+                    this.setState ({
+                        posts: res.data
                  });          
             }).catch(error => {
                 console.log('error', error)
@@ -30,58 +30,57 @@ class withRouterUpdateUser extends Component {
         var value = event.target.value;
 
         this.setState (prevState => {
-            prevState.users[name] = value;
+            prevState.posts[name] = value;
             return {
-                users: prevState.users
+                posts: prevState.posts
             };
         })
     }
 
-    updateDataHandler = (users) => {
-        console.log('Update user have id : ', users.id );
-        axios.put('https://jsonplaceholder.typicode.com/posts/' + users.id, users)
+    updateDataHandler = (posts) => {
+        console.log('Update post id : ', posts.id );
+        axios.put('https://jsonplaceholder.typicode.com/posts/' + posts.id, posts)
                 .then(res => {
                     console.log(res);
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        alert (`Your user have id ${users.id} is updated.`)
+        alert (`Your post id ${posts.id} is updated.`)
     }
-
 
     render() {
         
         return (
-            <div className='updateUser'>
-            <h3> Update user (put) </h3>
+            <div className='updatePost'>
+            <h3> Update Post (put) </h3>
             <Form>
                 <FormGroup>
                     
                     <Label for="userId">UserId</Label>
-                    <Input type="text" name="userId" value={this.state.users.userId} 
+                    <Input type="text" name="userId" value={this.state.posts.userId} 
                     onChange={this.inputChangeHandler}
                     />
                 </FormGroup>
                 <FormGroup>
                     <Label for="id">Id</Label>
-                    <Input type="text" name="id" value={this.state.users.id} 
+                    <Input type="text" name="id" value={this.state.posts.id} 
                     onChange={this.inputChangeHandler}
                     disabled/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="title">Title</Label>
-                    <Input type="text" name="title" value={this.state.users.title} 
+                    <Input type="text" name="title" value={this.state.posts.title} 
                     onChange={this.inputChangeHandler}
                      />
                 </FormGroup>
                 <FormGroup>
                     <Label for="body">Body</Label>
-                    <Input type="text" name="body" value={this.state.users.body}  
+                    <Input type="text" name="body" value={this.state.posts.body}  
                     onChange={this.inputChangeHandler}
                     />
                 </FormGroup>
-                <Button onClick= {() => this.updateDataHandler(this.state.users)}> Save </Button>
+                <Button onClick= {() => this.updateDataHandler(this.state.posts)}> Save </Button>
             </Form>
             </div>
 
@@ -89,4 +88,4 @@ class withRouterUpdateUser extends Component {
     }
 }
 
-export default withRouter(withRouterUpdateUser);
+export default UpdatePost;

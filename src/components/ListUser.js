@@ -80,8 +80,8 @@ class ListUser extends Component {
                   <td>{user.id}</td>
                   <td>{user.title}</td>
                   <td>{user.body}</td>
-                  <td> <a href={`/detail/${user.id}`} target="_blank"> Detail </a> </td>
-                  <td> <a href={`/update/${user.id}`} target='_blank'> Update </a> </td>
+                  <td> <a href={`/detail/${user.id}`} > Detail </a> </td>
+                  <td> <a href={`/update/${user.id}`} > Update </a> </td>
                   <td> <Button onClick= {() => this.deleteDataHandler(user)} > Delete </Button> </td>
                   
                   {/* <td> {user.userId} </td>

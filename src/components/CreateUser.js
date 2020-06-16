@@ -34,7 +34,7 @@ class CreateUser extends Component {
             });
         if (window.confirm(`Your user ${users.userId} is created. Do you want to go list user page ?`))
             {
-                return window.location.href='/list';
+                return window.location.href='/';
             }
         else{
             return; 
